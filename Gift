@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day 💙</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #1e3c72, #2a5298); /* Blue gradient */
+            color: white;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .love-box {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            display: inline-block;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        .heart {
+            font-size: 80px;
+            cursor: pointer;
+            color: #1eb2ff; /* Light Blue */
+            animation: heartbeat 1s infinite alternate;
+        }
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.2); }
+        }
+        .hidden {
+            display: none;
+        }
+        #ascii, #quote, #morse {
+            font-family: 'Courier New', monospace;
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+        .qr-code, .spotify-code {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>💙 Happy Valentine's Day! 💙</h1>
+    <p>Click the heart for a surprise! 👇</p>
+
+    <div class="love-box">
+        <p class="heart" onclick="revealSurprise()">💙</p>
+
+        <div id="ascii" class="hidden">
+            <pre>
+  *****     *****  
+*******   *******  
+***************  
+ *************  
+   *********  
+    *******  
+      ***    
+       *     
+            </pre>
+        </div>
+
+        <div id="quote" class="hidden"></div>
+
+        <div id="morse" class="hidden"></div>
+
+        <div class="qr-code hidden">
+            <p>Scan this QR code for one more surprise! 🎁</p>
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://your-surprise-link.com" alt="QR Code">
+        </div>
+
+        <div class="spotify-code hidden">
+            <p>🎶 Scan this Spotify Code to Play a Romantic Song 🎶</p>
+            <img src="https://scannables.scdn.co/uri/plain/jpeg/1e3c72/white/640/spotify:track:3FAy7AoW3BQoglUXoX3qQY" alt="Spotify Code">
+            <p>(Open Spotify, tap search, and scan the code!)</p>
+        </div>
+    </div>
+
+    <script>
+        function revealSurprise() {
+            document.getElementById("ascii").classList.remove("hidden");
+
+            // Love Quotes Generator
+            const quotes = [
+                "I love you not only for what you are but for what I am when I am with you.",
+                "You are my heart, my life, my one and only thought.",
+                "If I know what love is, it is because of you.",
+                "You’re the missing piece to my coding bug-free life."
+            ];
+            document.getElementById("quote").innerHTML = "💬 " + quotes[Math.floor(Math.random() * quotes.length)];
+            document.getElementById("quote").classList.remove("hidden");
+
+            // Morse Code Love Message
+            const morse_dict = { 'I': '..', 'L': '.-..', 'O': '---', 'V': '...-', 'E': '.', 'Y': '-.--', 'U': '..-' };
+            const message = "I LOVE YOU";
+            const encoded = message.split('').map(c => morse_dict[c] || ' ').join(' ');
+            document.getElementById("morse").innerHTML = "💡 Morse Code: " + encoded;
+            document.getElementById("morse").classList.remove("hidden");
+
+            // Show QR Code
+            document.querySelector(".qr-code").classList.remove("hidden");
+
+            // Show Spotify Code
+            document.querySelector(".spotify-code").classList.remove("hidden");
+        }
+    </script>
+</body>
+</html>
