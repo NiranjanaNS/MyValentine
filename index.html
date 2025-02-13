@@ -8,7 +8,7 @@
         body {
             text-align: center;
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(to right, #1e3c72, #2a5298); /* Blue gradient */
+            background: linear-gradient(to right, #1e3c72, #2a5298);
             color: white;
             padding: 20px;
             min-height: 100vh;
@@ -16,6 +16,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            overflow: hidden; /* Prevents unwanted scroll issues */
         }
         h1 {
             font-size: 2.5em;
@@ -36,6 +37,7 @@
             cursor: pointer;
             color: #1eb2ff;
             animation: heartbeat 1s infinite alternate;
+            user-select: none; /* Prevents accidental selection on touch */
         }
         @keyframes heartbeat {
             0% { transform: scale(1); }
@@ -44,7 +46,7 @@
         .hidden {
             display: none;
         }
-        #ascii, #quote, #morse {
+        #quote, #morse {
             font-family: 'Courier New', monospace;
             margin-top: 20px;
             font-size: 1.2em;
@@ -61,12 +63,6 @@
     <div class="love-box">
         <p class="heart" id="heart">💙</p>
 
-        <div id="ascii" class="hidden">
-            <pre>
-      :::::::::::::::
-            </pre>
-        </div>
-
         <div id="friendship-photo" class="hidden">
             <p>💙 Our Best Memories Together 💙</p>
             <img src="https://github.com/NiranjanaNS/MyValentine/blob/main/dream_TradingCard%20(2).jpg?raw=true" 
@@ -75,7 +71,6 @@
         </div>
 
         <div id="quote" class="hidden"></div>
-
         <div id="morse" class="hidden"></div>
 
         <div class="spotify-code hidden">
@@ -92,9 +87,13 @@
             const heart = document.getElementById("heart");
 
             function revealSurprise(event) {
-                event.preventDefault(); // Prevent double triggering
+                event.preventDefault(); // Prevent touch scrolling issues
 
-                document.getElementById("ascii").classList.remove("hidden");
+                // Ensure the event is only triggered once
+                heart.removeEventListener("click", revealSurprise);
+                heart.removeEventListener("touchstart", revealSurprise);
+
+                document.getElementById("friendship-photo").classList.remove("hidden");
 
                 // Best Friend Style Quotes (Indirect "I Love You")
                 const quotes = [
@@ -121,10 +120,6 @@
 
                 // Show Spotify Code
                 document.querySelector(".spotify-code").classList.remove("hidden");
-
-                // Remove event listener after the first tap to prevent multiple taps
-                heart.removeEventListener("click", revealSurprise);
-                heart.removeEventListener("touchstart", revealSurprise);
             }
 
             // Add both click and touch event listeners
