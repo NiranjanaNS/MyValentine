@@ -61,29 +61,39 @@
     <div class="love-box">
         <p class="heart" id="heart">💙</p>
 
-<div id="friendship-photo" class="hidden">
-    <p>💙 Our Best Memories Together 💙</p>
-    <img src="https://github.com/NiranjanaNS/MyValentine/blob/main/dream_TradingCard%20(2).jpg?raw=true" 
-         alt="Our Picture" 
-         style="width: 90%; max-width: 500px; border-radius: 15px; box-shadow: 0px 4px 10px rgba(0,0,0,0.3);">
-</div>
+        <div id="ascii" class="hidden">
+            <pre>
+      :::::::::::::::
+            </pre>
+        </div>
+
+        <div id="friendship-photo" class="hidden">
+            <p>💙 Our Best Memories Together 💙</p>
+            <img src="https://github.com/NiranjanaNS/MyValentine/blob/main/dream_TradingCard%20(2).jpg?raw=true" 
+                alt="Our Picture" 
+                style="width: 90%; max-width: 500px; border-radius: 15px; box-shadow: 0px 4px 10px rgba(0,0,0,0.3);">
+        </div>
 
         <div id="quote" class="hidden"></div>
 
         <div id="morse" class="hidden"></div>
 
         <div class="spotify-code hidden">
-    <p>🎶 Scan this Spotify Code to Play a Song 🎶</p>
-    <img src="https://github.com/NiranjanaNS/MyValentine/blob/main/spcode-7e76tfLZK1jI4ZjsRA6Bjp.jpeg?raw=true" alt="Spotify Code" style="width: 90%; max-width: 500px; height: auto;">
-    <p>(Open Spotify, tap search, and scan the code!)</p>
-</div>
+            <p>🎶 Scan this Spotify Code to Play a Song 🎶</p>
+            <img src="https://github.com/NiranjanaNS/MyValentine/blob/main/spcode-7e76tfLZK1jI4ZjsRA6Bjp.jpeg?raw=true" 
+                alt="Spotify Code" 
+                style="width: 90%; max-width: 500px; height: auto;">
+            <p>(Open Spotify, tap search, and scan the code!)</p>
+        </div>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const heart = document.getElementById("heart");
 
-            function revealSurprise() {
+            function revealSurprise(event) {
+                event.preventDefault(); // Prevent double triggering
+
                 document.getElementById("ascii").classList.remove("hidden");
 
                 // Best Friend Style Quotes (Indirect "I Love You")
@@ -111,11 +121,15 @@
 
                 // Show Spotify Code
                 document.querySelector(".spotify-code").classList.remove("hidden");
+
+                // Remove event listener after the first tap to prevent multiple taps
+                heart.removeEventListener("click", revealSurprise);
+                heart.removeEventListener("touchstart", revealSurprise);
             }
 
             // Add both click and touch event listeners
-            heart.addEventListener("click", revealSurprise);
-            heart.addEventListener("touchstart", revealSurprise);
+            heart.addEventListener("click", revealSurprise, { once: true });
+            heart.addEventListener("touchstart", revealSurprise, { once: true });
         });
     </script>
 </body>
