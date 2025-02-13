@@ -49,81 +49,79 @@
             margin-top: 20px;
             font-size: 1.2em;
         }
-        .qr-code, .spotify-code {
+        .spotify-code {
             margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <h1>💙 Happy Valentine's Day! 💙</h1>
-    <p>Click the heart for a surprise! 👇</p>
+    <p>Tap the heart for a surprise! 👇</p>
 
     <div class="love-box">
-        <p class="heart" onclick="revealSurprise()">💙</p>
+        <p class="heart" id="heart">💙</p>
 
-        <div id="ascii" class="hidden">
-            <pre>
- *****    *****  
-*******  *******
-**************** 
- **************  
-   ********** 
-    ******** 
-      ****  
-       **   
-            </pre>
-        </div>
+<div id="ascii" class="hidden">
+    <pre>
+      .:::.   .:::.
+    :::::::.:::::::
+    :::::::::::::::
+    ':::::::::::::'
+      ':::::::::'
+        ':::::'
+          ':'
+    </pre>
+</div>
 
         <div id="quote" class="hidden"></div>
 
         <div id="morse" class="hidden"></div>
 
-        <div class="qr-code hidden">
-            <p>Scan this QR code for one more surprise! 🎁</p>
-            <img src="https://github.com/NiranjanaNS/MyValentine/blob/main/spcode-7e76tfLZK1jI4ZjsRA6Bjp.jpeg?raw=true
-" alt="Spotify Code">
-        </div>
-
         <div class="spotify-code hidden">
-            <p>🎶 Scan this Spotify Code to Play a Romantic Song 🎶</p>
-            <img src="https://scannables.scdn.co/uri/plain/jpeg/1e3c72/white/640/spotify:track:3FAy7AoW3BQoglUXoX3qQY" alt="Spotify Code">
+            <p>🎶 Scan this Spotify Code to Play a Song 🎶</p>
+            <img src="https://github.com/NiranjanaNS/MyValentine/blob/main/spcode-7e76tfLZK1jI4ZjsRA6Bjp.jpeg?raw=true" alt="Spotify Code">
             <p>(Open Spotify, tap search, and scan the code!)</p>
         </div>
     </div>
 
     <script>
-        function revealSurprise() {
-            document.getElementById("ascii").classList.remove("hidden");
+        document.addEventListener("DOMContentLoaded", function () {
+            const heart = document.getElementById("heart");
 
-            // Love Quotes Generator
-            const quotes = [
-                "You're my favorite person to annoy forever. 😜",
-    "Life is better with you—like code without bugs. 😆",
-    "If friendship had a version control, I'd never hit undo on you. 💙",
-    "You're my safe space, my chaos, and my best adventure. 🌍",
-    "No matter where life takes us, you'll always be my constant. 😊",
-    "You're like a WiFi signal—strong, reliable, and always connecting with me. 📶💙",
-    "You're the reason my world feels right, even on the worst days. 💫",
-    "If friendships were stars, you'd be my entire galaxy. ✨",
-    "I appreciate you more than I say... but you already know that, right? 😏",
-    "You're the only person I'd share my last slice of pizza with. 🍕💙"
-            ];
-            document.getElementById("quote").innerHTML = "💬 " + quotes[Math.floor(Math.random() * quotes.length)];
-            document.getElementById("quote").classList.remove("hidden");
+            function revealSurprise() {
+                document.getElementById("ascii").classList.remove("hidden");
 
-            // Morse Code Love Message
-            const morse_dict = { 'I': '..', 'L': '.-..', 'O': '---', 'V': '...-', 'E': '.', 'Y': '-.--', 'U': '..-' };
-            const message = "I LOVE YOU";
-            const encoded = message.split('').map(c => morse_dict[c] || ' ').join(' ');
-            document.getElementById("morse").innerHTML = "💡 Morse Code: " + encoded;
-            document.getElementById("morse").classList.remove("hidden");
+                // Best Friend Style Quotes (Indirect "I Love You")
+                const quotes = [
+                    "You're my favorite person to annoy forever. 😜",
+                    "Life is better with you—like code without bugs. 😆",
+                    "If friendship had a version control, I'd never hit undo on you. 💙",
+                    "You're my safe space, my chaos, and my best adventure. 🌍",
+                    "No matter where life takes us, you'll always be my constant. 😊",
+                    "You're like a WiFi signal—strong, reliable, and always connecting with me. 📶💙",
+                    "You're the reason my world feels right, even on the worst days. 💫",
+                    "If friendships were stars, you'd be my entire galaxy. ✨",
+                    "I appreciate you more than I say... but you already know that, right? 😏",
+                    "You're the only person I'd share my last slice of pizza with. 🍕💙"
+                ];
+                document.getElementById("quote").innerHTML = "💬 " + quotes[Math.floor(Math.random() * quotes.length)];
+                document.getElementById("quote").classList.remove("hidden");
 
-            // Show QR Code
-            document.querySelector(".qr-code").classList.remove("hidden");
+                // Morse Code Message
+                const morse_dict = { 'I': '..', 'L': '.-..', 'O': '---', 'V': '...-', 'E': '.', 'Y': '-.--', 'U': '..-' };
+                const message = "I LOVE YOU";
+                const encoded = message.split('').map(c => morse_dict[c] || ' ').join(' ');
+                document.getElementById("morse").innerHTML = "💡 Morse Code: " + encoded;
+                document.getElementById("morse").classList.remove("hidden");
 
-            // Show Spotify Code
-            document.querySelector(".spotify-code").classList.remove("hidden");
-        }
+                // Show Spotify Code
+                document.querySelector(".spotify-code").classList.remove("hidden");
+            }
+
+            // Add both click and touch event listeners
+            heart.addEventListener("click", revealSurprise);
+            heart.addEventListener("touchstart", revealSurprise);
+        });
     </script>
 </body>
 </html>
