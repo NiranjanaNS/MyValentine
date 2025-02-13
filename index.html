@@ -16,7 +16,6 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            overflow: hidden; /* Prevents unwanted scrolling */
         }
         h1 {
             font-size: 2.5em;
@@ -117,6 +116,11 @@
 
                 // Show Spotify Code
                 document.querySelector(".spotify-code").classList.replace("hidden", "visible");
+
+                // Auto-scroll smoothly to the bottom
+                setTimeout(() => {
+                    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+                }, 500);
 
                 // Remove event listener after first tap
                 heart.removeEventListener("pointerdown", revealSurprise);
