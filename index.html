@@ -78,14 +78,9 @@
 
         <div id="morse" class="hidden"></div>
 
-        <div class="qr-code hidden">
-            <p>Scan this QR code for one more surprise! 🎁</p>
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://your-surprise-link.com" alt="QR Code">
-        </div>
-
         <div class="spotify-code hidden">
             <p>🎶 Scan this Spotify Code to Play a Romantic Song 🎶</p>
-            <img src="https://scannables.scdn.co/uri/plain/jpeg/1e3c72/white/640/spotify:track:3FAy7AoW3BQoglUXoX3qQY" alt="Spotify Code">
+            <img src="https://github.com/NiranjanaNS/MyValentine/blob/main/spcode-7e76tfLZK1jI4ZjsRA6Bjp.jpeg?raw=true" alt="Spotify Code">
             <p>(Open Spotify, tap search, and scan the code!)</p>
         </div>
     </div>
@@ -95,11 +90,19 @@
             document.getElementById("ascii").classList.remove("hidden");
 
             // Love Quotes Generator
-            const quotes = [
-                "I love you not only for what you are but for what I am when I am with you.",
-                "You are my heart, my life, my one and only thought.",
-                "If I know what love is, it is because of you.",
-                "You’re the missing piece to my coding bug-free life."
+           const quotes = [
+    "You're my favorite person to annoy forever. 😜",
+    "Life is better with you—like code without bugs. 😆",
+    "If friendship had a version control, I'd never hit undo on you. 💙",
+    "You're my safe space, my chaos, and my best adventure. 🌍",
+    "No matter where life takes us, you'll always be my constant. 😊",
+    "You're like a WiFi signal—strong, reliable, and always connecting with me. 📶💙",
+    "You're the reason my world feels right, even on the worst days. 💫",
+    "If friendships were stars, you'd be my entire galaxy. ✨",
+    "I appreciate you more than I say... but you already know that, right? 😏",
+    "You're the only person I'd share my last slice of pizza with. 🍕💙"
+];
+
             ];
             document.getElementById("quote").innerHTML = "💬 " + quotes[Math.floor(Math.random() * quotes.length)];
             document.getElementById("quote").classList.remove("hidden");
@@ -110,9 +113,6 @@
             const encoded = message.split('').map(c => morse_dict[c] || ' ').join(' ');
             document.getElementById("morse").innerHTML = "💡 Morse Code: " + encoded;
             document.getElementById("morse").classList.remove("hidden");
-
-            // Show QR Code
-            document.querySelector(".qr-code").classList.remove("hidden");
 
             // Show Spotify Code
             document.querySelector(".spotify-code").classList.remove("hidden");
