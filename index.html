@@ -16,7 +16,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            overflow: hidden; /* Prevents unwanted scroll issues */
+            overflow: hidden; /* Prevents unwanted scrolling */
         }
         h1 {
             font-size: 2.5em;
@@ -37,7 +37,7 @@
             cursor: pointer;
             color: #1eb2ff;
             animation: heartbeat 1s infinite alternate;
-            user-select: none; /* Prevents accidental selection on touch */
+            user-select: none;
         }
         @keyframes heartbeat {
             0% { transform: scale(1); }
@@ -45,11 +45,12 @@
         }
         .hidden {
             display: none;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
         }
-        #quote, #morse {
-            font-family: 'Courier New', monospace;
-            margin-top: 20px;
-            font-size: 1.2em;
+        .visible {
+            display: block;
+            opacity: 1;
         }
         .spotify-code {
             margin-top: 20px;
@@ -87,13 +88,9 @@
             const heart = document.getElementById("heart");
 
             function revealSurprise(event) {
-                event.preventDefault(); // Prevent touch scrolling issues
+                event.preventDefault();
 
-                // Ensure the event is only triggered once
-                heart.removeEventListener("click", revealSurprise);
-                heart.removeEventListener("touchstart", revealSurprise);
-
-                document.getElementById("friendship-photo").classList.remove("hidden");
+                document.getElementById("friendship-photo").classList.replace("hidden", "visible");
 
                 // Best Friend Style Quotes (Indirect "I Love You")
                 const quotes = [
@@ -109,22 +106,24 @@
                     "You're the only person I'd share my last slice of pizza with. 🍕💙"
                 ];
                 document.getElementById("quote").innerHTML = "💬 " + quotes[Math.floor(Math.random() * quotes.length)];
-                document.getElementById("quote").classList.remove("hidden");
+                document.getElementById("quote").classList.replace("hidden", "visible");
 
                 // Morse Code Message
                 const morse_dict = { 'I': '..', 'L': '.-..', 'O': '---', 'V': '...-', 'E': '.', 'Y': '-.--', 'U': '..-' };
                 const message = "I LOVE YOU";
                 const encoded = message.split('').map(c => morse_dict[c] || ' ').join(' ');
                 document.getElementById("morse").innerHTML = "💡 Morse Code: " + encoded;
-                document.getElementById("morse").classList.remove("hidden");
+                document.getElementById("morse").classList.replace("hidden", "visible");
 
                 // Show Spotify Code
-                document.querySelector(".spotify-code").classList.remove("hidden");
+                document.querySelector(".spotify-code").classList.replace("hidden", "visible");
+
+                // Remove event listener after first tap
+                heart.removeEventListener("pointerdown", revealSurprise);
             }
 
-            // Add both click and touch event listeners
-            heart.addEventListener("click", revealSurprise, { once: true });
-            heart.addEventListener("touchstart", revealSurprise, { once: true });
+            // Add event listener for touch and click
+            heart.addEventListener("pointerdown", revealSurprise, { once: true });
         });
     </script>
 </body>
